@@ -83,7 +83,22 @@
         color: var(--burgundy);
         font-weight: 600;
       }
-
+      .nav-actions .btn-login {
+        text-decoration: none;
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--burgundy);
+        border: 1px solid rgba(122, 28, 61, 0.3);
+        padding: 8px 24px;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+      }
+      .nav-actions .btn-login:hover {
+        background: var(--burgundy);
+        color: var(--white);
+        border-color: var(--burgundy);
+      }
       /* Nội dung trang Podcast */
       .podcast-container {
         max-width: 800px;
@@ -153,65 +168,58 @@
         background: var(--burgundy);
       }
 
-      /* ---------- RESPONSIVE CHO ĐIỆN THOẠI ---------- */
+      /* ---------- RESPONSIVE TỐI ƯU CHO ĐIỆN THOẠI (PODCAST) ---------- */
       @media screen and (max-width: 768px) {
-        .intro-quote {
-          font-size: 1.12em;
-          padding: 0 8px;
+        /* 1. Tối ưu thanh Nav ngang y hệt các trang kia */
+        /* 1. Tối ưu thanh Nav ngang (Bật chế độ vuốt ngang, chống rớt dòng) */
+        .top-nav {
+          padding: 0 12px;
+          height: 60px;
+          gap: 12px;
+          flex-wrap: nowrap !important; /* Lệnh "thép": Cấm tuyệt đối rớt dòng */
+          overflow-x: auto; /* Bật tính năng vuốt ngang cho điện thoại */
+          overflow-y: hidden;
+          /* Ẩn thanh cuộn ngang đi cho thẩm mỹ (vẫn vuốt được bình thường) */
+          scrollbar-width: none;
+          -ms-overflow-style: none;
         }
-        .line-4 {
-          font-size: 1.05em;
-          margin-top: 18px !important;
-        }
-        .btn-enter {
-          margin-top: 32px;
-          padding: 11px 30px;
-          font-size: 0.85em;
+        .top-nav::-webkit-scrollbar {
+          display: none;
         }
 
-        /* Tối ưu thanh Nav ngang cho mobile */
-        .top-nav {
-          padding: 0 16px;
-          height: 64px;
+        .nav-logo {
+          flex-shrink: 0;
+        }
+        .nav-logo-img {
+          width: 30px;
+          height: 30px;
         }
         .nav-logo-text {
           display: none;
-        } /* Ẩn chữ logo đi cho đỡ chật, chỉ để lại hình */
+        } /* Vẫn ẩn chữ logo cho đỡ chật */
+
         .nav-links {
-          gap: 0;
+          display: flex;
+          gap: 14px;
+          flex-shrink: 0; /* Cấm bóp méo chữ */
+          align-items: center;
         }
         .nav-links a {
-          font-size: 14px;
-        }
-        .nav-actions .btn-login {
-          padding: 6px 16px;
           font-size: 13px;
+          font-weight: 600;
+          white-space: nowrap;
         }
 
-        #main-station {
-          padding: 100px 16px 50px;
+        .nav-actions {
+          flex-shrink: 0; /* Cấm bóp méo nút */
+          margin-left: auto; /* Luôn đẩy nút về sát lề phải */
+          display: flex;
+          align-items: center;
         }
-        h1 {
-          font-size: 1.85em;
-        }
-        p.intro-sub {
-          font-size: 1em;
-        }
-        .btn-mood {
-          padding: 11px 20px;
-          font-size: 14px;
-          flex: 1 1 calc(45% - 12px);
-        }
-        #result-box {
-          margin-top: 44px;
-          padding: 36px 22px;
-        }
-        .quote {
-          font-size: 1.18em;
-          padding: 0 6px;
-        }
-        .nav-card {
-          padding: 30px 22px;
+        .nav-actions .btn-login {
+          padding: 6px 14px;
+          font-size: 12px;
+          white-space: nowrap;
         }
       }
     </style>
@@ -225,16 +233,15 @@
       </a>
 
       <div class="nav-links">
-        <!-- Tạm thời ẩn các menu chưa phát triển
         <a href="ve-du-an.html">Về dự án</a>
-        <a href="kien-thuc.html">Kiến thức</a>
-        <a href="cong-dong.html">Cộng đồng</a>
-        -->
+        <a href="podcast.html">Lời thì thầm</a>
+        <!-- <a href="cong-dong.html">Cộng đồng</a> -->
         <!-- <a href="podcast.html">Podcast</a> -->
       </div>
 
       <div class="nav-actions">
-        <a href="podcast.html" style="margin-right: 20px">Lời thì thầm</a>
+        <!-- <a href="ve-du-an.html" style="margin-right: 20px">Giới thiệu</a>
+        <a href="podcast.html" style="margin-right: 10px">Lời thì thầm</a> -->
         <!-- Đổi link trỏ về trang đang nâng cấp -->
         <a href="dang-nang-cap.html" class="btn-login">Góc của tôi</a>
       </div>

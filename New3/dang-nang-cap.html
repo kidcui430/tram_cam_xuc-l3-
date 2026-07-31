@@ -3,52 +3,343 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đang Nâng Cấp - Trạm Chữa Lành</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <title>Góc Giải Trí - Trạm Chữa Lành</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      /* BỘ BIẾN MÀU CHUẨN TỪ TRANG CHỦ CỦA ÔNG */
       :root {
-        --navy-950: #0c1b2e; --navy-800: #1a365d; --burgundy: #7a1c3d;
-        --ivory: #f7f5f1; --gray-600: #5b6572; --white: #ffffff;
+        --navy-950: #0c1b2e;
+        --navy-800: #1a365d;
+        --navy-700: #233f66;
+        --navy-600: #33517d;
+        --burgundy: #7a1c3d;
+        --burgundy-soft: #a84463;
+        --ivory: #f7f5f1;
+        --paper: #fffdfa;
+        --stone: #e9e5de;
+        --gray-600: #5b6572;
+        --gray-400: #8b93a1;
+        --white: #ffffff;
         --serif: "Lora", "Times New Roman", serif;
         --sans: "Be Vietnam Pro", "Segoe UI", sans-serif;
       }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        margin: 0; min-height: 100vh;
-        font-family: var(--sans); background: var(--ivory);
-        display: flex; justify-content: center; align-items: center;
-        text-align: center; padding: 20px;
+        margin: 0;
+        font-family: var(--sans);
+        background: var(--ivory);
+        color: var(--gray-600);
+        text-align: center;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        padding: 60px 20px;
+        min-height: 100vh;
       }
-      .notice-card {
-        background: var(--white); padding: 50px 40px;
-        border-radius: 12px; max-width: 480px;
-        box-shadow: 0 20px 40px rgba(12, 27, 46, 0.06);
-        border: 1px solid #e9e5de;
+
+      /* ---------- HEADER TRANG ---------- */
+      .station-header {
+        max-width: 640px;
+        margin: 0 auto 56px;
       }
-      .icon { font-size: 3em; margin-bottom: 20px; }
-      h1 {
-        font-family: var(--serif); color: var(--navy-800);
-        font-size: 2em; margin: 0 0 16px;
+
+      .station-header h1 {
+        font-family: var(--serif);
+        color: var(--navy-800);
+        font-size: 2.6em; /* Chuẩn size trang chủ */
+        line-height: 1.25;
+        font-weight: 600;
+        margin: 0 0 20px;
+        letter-spacing: -0.5px;
       }
-      p {
-        color: var(--gray-600); font-size: 1.05em; line-height: 1.7;
-        margin: 0 0 32px;
+
+      p.intro-sub {
+        font-size: 1.08em; /* Chuẩn size trang chủ */
+        line-height: 1.7;
+        color: var(--gray-600);
+        margin: 0 auto;
+        max-width: 480px;
       }
+
+      /* ---------- BỐ CỤC MASTER - DETAIL ---------- */
+      .goc-giai-tri-container {
+        display: flex;
+        gap: 24px;
+        max-width: 960px;
+        margin: 0 auto;
+        text-align: left; /* Đưa chữ trong khung về bên trái cho dễ đọc */
+      }
+
+      /* Cột danh sách */
+      .danh-sach-truyen {
+        flex: 3;
+        background: var(--paper);
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid var(--stone);
+        box-shadow: 0 24px 60px rgba(12, 27, 46, 0.05); /* Lấy bóng mờ từ Result Card */
+        height: fit-content;
+      }
+
+      .danh-sach-truyen h3 {
+        font-family: var(--serif);
+        color: var(--navy-800);
+        margin-top: 0;
+        border-bottom: 1px solid var(--stone);
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        font-size: 1.25em;
+        font-weight: 600;
+      }
+
+      .truyen-item {
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        background: transparent;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+        color: var(--gray-600);
+        font-weight: 500;
+        font-size: 15px; /* Bằng size nút bấm trang chủ */
+      }
+
+      .truyen-item:hover {
+        background: rgba(12, 27, 46, 0.03);
+        color: var(--navy-800);
+      }
+
+      .truyen-item.active {
+        background: var(--white);
+        border-left: 3px solid var(--burgundy);
+        color: var(--burgundy);
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(12, 27, 46, 0.04);
+        border: 1px solid var(--stone);
+        border-left-color: var(--burgundy);
+      }
+
+      /* Cột nội dung */
+      .khung-noi-dung {
+        flex: 7;
+        background: var(--paper);
+        padding: 40px;
+        border-radius: 8px;
+        border: 1px solid var(--stone);
+        box-shadow: 0 24px 60px rgba(12, 27, 46, 0.05);
+        min-height: 450px;
+      }
+
+      .noi-dung-chi-tiet {
+        display: none;
+        animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .noi-dung-chi-tiet.active {
+        display: block;
+      }
+
+      .noi-dung-chi-tiet h2 {
+        font-family: var(--serif);
+        color: var(--navy-800);
+        margin-top: 0;
+        margin-bottom: 24px;
+        font-size: 1.8em;
+        font-weight: 600;
+      }
+
+      .noi-dung-chi-tiet p {
+        color: var(--gray-600);
+        font-size: 1.08em; /* Cùng size đoạn văn trang chủ */
+        line-height: 1.85;
+        margin-bottom: 16px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Nút quay về */
+      .btn-container {
+        text-align: center;
+        margin-top: 56px;
+      }
+
       .btn-return {
-        display: inline-block; background: var(--navy-800); color: var(--white);
-        text-decoration: none; padding: 12px 32px; border-radius: 30px;
-        font-weight: 600; letter-spacing: 0.5px; transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        font-family: var(--sans);
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--burgundy);
+        border: 1px solid rgba(122, 28, 61, 0.3);
+        padding: 10px 32px;
+        border-radius: 40px;
+        background: rgba(122, 28, 61, 0.05);
+        transition: all 0.35s ease;
       }
+
       .btn-return:hover {
-        background: var(--burgundy); transform: translateY(-2px);
+        background: var(--burgundy);
+        color: var(--white);
+        border-color: var(--burgundy);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(122, 28, 61, 0.15);
+      }
+
+      /* ---------- RESPONSIVE TỐI ƯU CHO ĐIỆN THOẠI ---------- */
+      @media screen and (max-width: 768px) {
+        body {
+          padding: 40px 16px;
+        }
+
+        /* Khớp font size h1 và p trên mobile của index.html */
+        .station-header {
+          margin-bottom: 36px;
+        }
+        .station-header h1 {
+          font-size: 1.7em;
+          margin-bottom: 12px;
+        }
+        p.intro-sub {
+          font-size: 0.95em;
+          padding: 0 8px;
+        }
+
+        .goc-giai-tri-container {
+          flex-direction: column;
+        }
+
+        .danh-sach-truyen {
+          padding: 16px;
+        }
+
+        .khung-noi-dung {
+          padding: 24px 20px;
+          min-height: auto;
+        }
+
+        .noi-dung-chi-tiet h2 {
+          font-size: 1.4em;
+          margin-bottom: 16px;
+        }
+
+        .noi-dung-chi-tiet p {
+          font-size: 0.95em; /* Thu nhỏ chữ nội dung trên mobile */
+        }
       }
     </style>
   </head>
   <body>
-    <div class="notice-card">
-      <div class="icon">🌿</div>
-      <h1>Đang Dọn Dẹp</h1>
-      <p>Góc nhỏ này đang được chuẩn bị để mang đến cho bạn một không gian riêng tư trọn vẹn nhất. Bạn quay lại sau một thời gian nữa nhé.</p>
+    <!-- Tiêu đề Header -->
+    <div class="station-header">
+      <div
+        style="font-size: 2.2em; margin-bottom: 16px; color: var(--navy-800)"
+      >
+        🌿
+      </div>
+      <h1>Góc Giải Trí</h1>
+      <p class="intro-sub">
+        Nơi dừng chân tìm một nụ cười ngày cuối tuần. Chọn một mẩu chuyện bên
+        dưới để thư giãn nhé.
+      </p>
+    </div>
+
+    <!-- Khung chính -->
+    <div class="goc-giai-tri-container">
+      <!-- Cột danh sách truyện -->
+      <div class="danh-sach-truyen">
+        <h3>Mục lục</h3>
+        <div class="truyen-item active" data-target="truyen-1">
+          Chuyến xe bất ổn
+        </div>
+        <div class="truyen-item" data-target="truyen-2">Chút tĩnh lặng</div>
+        <div class="truyen-item" data-target="truyen-3">Ảnh vui sưu tầm</div>
+      </div>
+
+      <!-- Cột hiển thị nội dung -->
+      <div class="khung-noi-dung">
+        <div id="truyen-1" class="noi-dung-chi-tiet active">
+          <h2>Chuyến xe bất ổn</h2>
+          <p>
+            Một vị khách lên xe taxi và vỗ vai bác tài xế để hỏi đường. Bác tài
+            giật mình hét toáng lên, lách xe lên vỉa hè và dừng lại cách một tủ
+            kính chỉ vài centimet.
+          </p>
+          <p>
+            Vị khách hoàn hồn: "Tôi xin lỗi, tôi không ngờ vỗ vai nhẹ lại làm
+            bác giật mình thế."
+          </p>
+          <p>
+            Bác tài vã mồ hôi: "Không sao anh ạ. Hôm nay là ngày đầu tôi chạy xe
+            khách... trước nay tôi toàn lái xe chở quan tài thôi!"
+          </p>
+        </div>
+
+        <div id="truyen-2" class="noi-dung-chi-tiet">
+          <h2>Chút tĩnh lặng</h2>
+          <p>
+            Thi thoảng kẹt xe giữa dòng người hối hả, mở một bản nhạc nhẹ nhàng
+            trong không gian cabin nhỏ, nhìn ra ngoài thấy Sài Gòn vẫn tấp nập
+            như thế. Dù bận rộn hay mệt mỏi, quan trọng là mình vẫn tìm được
+            những khoảnh khắc bình yên cho riêng mình.
+          </p>
+        </div>
+
+        <div id="truyen-3" class="noi-dung-chi-tiet">
+          <h2>Ảnh vui sưu tầm</h2>
+          <p>Giải trí một chút cho nhẹ đầu nào:</p>
+          <div style="text-align: center; margin-top: 24px">
+            <img
+              src="https://via.placeholder.com/600x400?text=Thay+link+anh+cua+ong+vao+day"
+              alt="Ảnh vui"
+              style="
+                max-width: 100%;
+                border-radius: 6px;
+                border: 1px solid var(--stone);
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nút quay về -->
+    <div class="btn-container">
       <a href="index.html" class="btn-return">Quay về trạm chính</a>
     </div>
+
+    <!-- Script xử lý thao tác click -->
+    <script>
+      const cacTruyenItem = document.querySelectorAll(".truyen-item");
+      const cacNoiDung = document.querySelectorAll(".noi-dung-chi-tiet");
+
+      cacTruyenItem.forEach((item) => {
+        item.addEventListener("click", function () {
+          cacTruyenItem.forEach((i) => i.classList.remove("active"));
+          cacNoiDung.forEach((nd) => nd.classList.remove("active"));
+
+          this.classList.add("active");
+          const idNoiDung = this.getAttribute("data-target");
+          document.getElementById(idNoiDung).classList.add("active");
+        });
+      });
+    </script>
   </body>
 </html>

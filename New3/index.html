@@ -176,6 +176,7 @@
         font-weight: 600;
         font-size: 1.15em;
         background: linear-gradient(90deg, #f4b6bf 0%, #f6d3c9 100%);
+        background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -490,78 +491,117 @@
         }
       }
 
-      /* ---------- RESPONSIVE TỐI ƯU CHO ĐIỆN THOẠI ---------- */
+      /* ---------- RESPONSIVE TỐI ƯU CHO ĐIỆN THOẠI (INDEX) ---------- */
       @media screen and (max-width: 768px) {
-        /* Màn hình chào */
+        /* 1. Màn hình chào (Intro) */
         .intro-quote {
-          font-size: 1.12em;
-          padding: 0 8px;
+          font-size: 1.05em;
+          padding: 0 12px;
         }
         .line-4 {
-          font-size: 1.05em;
-          margin-top: 18px !important;
+          font-size: 1em;
+          margin-top: 16px !important;
         }
         .btn-enter {
-          margin-top: 32px;
-          padding: 11px 30px;
+          margin-top: 28px;
+          padding: 10px 28px;
           font-size: 0.85em;
         }
 
-        /* Tối ưu thanh Nav ngang cho mobile */
+        /* 2. Thanh Điều Hướng (Top Nav) - Ép không rớt dòng */
         .top-nav {
-          padding: 0 16px;
-          height: 64px;
+          padding: 0 12px;
+          height: 60px;
         }
-
+        .nav-logo-img {
+          width: 32px;
+          height: 32px;
+        } /* Logo nhỏ lại */
         .nav-logo-text {
-          display: none; /* Ẩn chữ logo đi cho đỡ chật, chỉ để lại hình */
-        }
-
-        /* Ép .nav-actions thành một hàng ngang không bao giờ bị rớt dòng */
-        .nav-actions {
+          display: none;
+        } /* Ẩn chữ logo để nhường chỗ */
+        .nav-links {
           display: flex;
-          align-items: center; /* Canh giữa 2 chữ theo chiều dọc */
-          gap: 15px; /* Tự động tạo khoảng cách giữa Podcast và Góc của tôi */
-          white-space: nowrap; /* Lệnh quan trọng: Cấm rớt dòng dù màn hình nhỏ */
+          gap: 12px;
         }
-
-        /* Định dạng chung cho các link trong nav-actions nếu cần */
-        .nav-actions a {
-          font-size: 12px;
-          font-weight: 600;
-        }
-
-        .nav-actions .btn-login {
-          padding: 6px 16px;
+        .nav-links a {
           font-size: 13px;
-          white-space: nowrap; /* Đảm bảo riêng nút cũng không bị bể chữ */
+          font-weight: 600;
+          white-space: nowrap; /* Cấm rớt chữ */
+        }
+        .nav-actions .btn-login {
+          padding: 6px 12px;
+          font-size: 12px;
+          white-space: nowrap;
         }
 
-        /* Không gian chính */
+        /* 3. Không gian chính */
         #main-station {
-          padding: 100px 16px 50px;
+          padding: 90px 16px 50px;
+        }
+        .station-header {
+          margin-bottom: 36px;
         }
         h1 {
-          font-size: 1.85em;
+          font-size: 1.7em;
+          margin-bottom: 12px;
         }
         p.intro-sub {
-          font-size: 1em;
+          font-size: 0.95em;
+          line-height: 1.6;
+          padding: 0 8px;
+        }
+
+        /* 4. Các nút cảm xúc */
+        .btn-group {
+          gap: 10px;
         }
         .btn-mood {
-          padding: 11px 20px;
-          font-size: 14px;
-          flex: 1 1 calc(45% - 12px);
+          padding: 10px 16px;
+          font-size: 13.5px;
+          flex: 1 1 calc(50% - 10px); /* Chia làm 2 cột cân đối */
         }
+
+        /* 5. Khung kết quả Lời thì thầm */
         #result-box {
-          margin-top: 44px;
-          padding: 36px 22px;
+          margin-top: 40px;
+          padding: 32px 20px;
+        }
+        .quote-icon {
+          font-size: 2.5em;
+        } /* Thu nhỏ ngoặc kép */
+        .quote-left {
+          top: 4px;
+          left: 12px;
+        }
+        .quote-right {
+          bottom: -10px;
+          right: 12px;
         }
         .quote {
-          font-size: 1.18em;
-          padding: 0 6px;
+          font-size: 1.1em;
+          line-height: 1.7;
+          padding: 0 8px;
+        }
+        .result-caption {
+          margin-top: 20px;
+          font-size: 0.75em;
+        }
+
+        /* 6. Thẻ điều hướng bên dưới */
+        .nav-box {
+          margin-top: 60px;
         }
         .nav-card {
-          padding: 30px 22px;
+          padding: 28px 20px;
+        }
+        .nav-text {
+          font-size: 1.05em;
+          margin-bottom: 20px;
+        }
+        .nav-btn {
+          padding: 10px 24px;
+          font-size: 13px;
         }
       }
 
@@ -612,15 +652,14 @@
       </a>
 
       <div class="nav-links">
-        <!-- Tạm thời ẩn các menu chưa phát triển
         <a href="ve-du-an.html">Về dự án</a>
-        <a href="kien-thuc.html">Kiến thức</a>
-        <a href="cong-dong.html">Cộng đồng</a>
-        -->
+        <a href="podcast.html">Lời thì thầm</a>
+        <!-- <a href="cong-dong.html">Cộng đồng</a> -->
       </div>
 
       <div class="nav-actions">
-        <a href="podcast.html" style="margin-right: 20px">Lời thì thầm</a>
+        <!-- <a href="ve-du-an.html" style="margin-right: 20px">Giới thiệu</a>
+        <a href="podcast.html" style="margin-right: 20px">Lời thì thầm</a> -->
         <!-- Đổi link trỏ về trang đang nâng cấp -->
         <a href="dang-nang-cap.html" class="btn-login">Góc của tôi</a>
       </div>
